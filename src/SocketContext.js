@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef,createContext } from 'react';
 import { io } from 'socket.io-client';
 import Peer from 'simple-peer';
+import { Backdrop, CircularProgress} from '@material-ui/core';
 
 const SocketContext = createContext();
 const socket = io(process.env.REACT_APP_URL_BASE_API);
@@ -112,8 +113,19 @@ function ContextProvider({children}) {
             setCallAccepted,
         }
       }>
-        
-        {children}
+         
+            {
+                !me && 
+                <Backdrop
+                    sx={{ color: '#fff'}}
+                    open={true}
+                    style={{zIndex: 999999}}
+                >
+                    <CircularProgress style={{color: 'white'}} />
+                </Backdrop>
+            }
+
+            {children}
       </SocketContext.Provider>
     );
   }
