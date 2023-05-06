@@ -44,7 +44,9 @@ function ContextProvider({children}) {
 
     const callUser = (id) => {
         const peer = new Peer({initiator: true, trickle: false, stream});
-        setPedding(true);
+        if(id) setPedding(true);
+        else return;
+     
         peer.on('signal', (data) => {
             // Gửi một sự kiện có tên là calluser đến server 
             // Nhằm truyền dữ liệu video và audio đến người nhận cuộc gọi (userToCall: id)
@@ -61,6 +63,10 @@ function ContextProvider({children}) {
             // peer.signal(), nó sẽ sử dụng dữ liệu này để xác định địa chỉ IP và các thông số khác của bên kia, 
             // Sau đó bắt đầu thiết lập kết nối WebRTC.
             peer.signal(signal);
+        })
+
+        socket.on('pedding', (data) => {
+            setPedding(false);
         })
 
         connectionRef.current = peer;
