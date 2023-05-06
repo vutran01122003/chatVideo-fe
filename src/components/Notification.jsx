@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
 import { Button } from '@material-ui/core';
 import { SocketContext } from "../SocketContext";
+import { Backdrop, CircularProgress} from '@material-ui/core';
 
 function Notification() {
-    const {anwserCall, call, callAccepted} = useContext(SocketContext);
+    const {anwserCall, call, callAccepted, pedding} = useContext(SocketContext);
     return ( 
     <div>
         {
@@ -15,6 +16,16 @@ function Notification() {
                     </Button>
                 </div>
             ) 
+        }
+        {
+            pedding && 
+            <Backdrop
+                    sx={{ color: '#fff'}}
+                    open={true}
+                    style={{zIndex: 999999}}
+                >
+                    <CircularProgress style={{color: 'white'}} />
+            </Backdrop>
         }
     </div> 
     );

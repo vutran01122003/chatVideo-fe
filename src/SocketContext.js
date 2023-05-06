@@ -13,6 +13,7 @@ function ContextProvider({children}) {
     const [callAccepted, setCallAccepted] = useState(false);
     const [callEnded, setCallEnded] = useState(false);
     const [name, setName] = useState('');
+    const [pedding, setPedding] = useState(false);
 
     const myVideo = useRef();
     const userVideo = useRef();
@@ -35,14 +36,15 @@ function ContextProvider({children}) {
 
             // Nhận thông tin từ người gọi
             socket.on('calluser', ({from, name: callerName, signal}) => {
-                setCall({isReceivedCall: true, from, name: callerName, signal})
+                setCall({isReceivedCall: true, from, name: callerName, signal});
+                setPedding(false);
             })
             // eslint-disable-next-line
     }, [])
 
     const callUser = (id) => {
         const peer = new Peer({initiator: true, trickle: false, stream});
-
+        setPedding(true);
         peer.on('signal', (data) => {
             // Gửi một sự kiện có tên là calluser đến server 
             // Nhằm truyền dữ liệu video và audio đến người nhận cuộc gọi (userToCall: id)
@@ -102,6 +104,8 @@ function ContextProvider({children}) {
             callEnded, 
             callAccepted, 
             connectionRef,
+            pedding, 
+            setPedding,
             setMe,
             setCall,
             setName,
