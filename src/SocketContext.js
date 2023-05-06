@@ -43,7 +43,6 @@ function ContextProvider({children}) {
     const callUser = (id) => {
         const peer = new Peer({initiator: true, trickle: false, stream});
 
-        if(!id) return;
         peer.on('signal', (data) => {
             // Gửi một sự kiện có tên là calluser đến server 
             // Nhằm truyền dữ liệu video và audio đến người nhận cuộc gọi (userToCall: id)
