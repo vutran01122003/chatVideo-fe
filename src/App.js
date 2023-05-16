@@ -7,14 +7,15 @@ import VideoPlayer from './components/VideoPlayer';
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
-        borderRadius: 15,
+        borderRadius: 5,
         margin: '30px 100px',
+        padding: '15px 0',
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
         width: '600px',
-        border: '2px solid black',
+        border: '2px solid gray',
         [theme.breakpoints.down('xs')]: {
           width: '90%',
         },
@@ -34,8 +35,8 @@ function App() {
   return (
     <div className={classes.wrapper}>
        <AppBar position='static' color='inherit' className={classes.appBar}>
-            <Typography variant='h2' align='center'>
-                Video Chat
+            <Typography variant='h3' align='center'>
+                VIDEO CHAT
             </Typography>
        </AppBar>
 

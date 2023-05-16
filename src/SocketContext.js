@@ -93,9 +93,13 @@ function ContextProvider({children}) {
     }
 
     const leaveCall = () => {
-        setCallEnded(true);
-        connectionRef.current.destroy();
-        window.location.reload();
+       try {
+            setCallEnded(true);
+            connectionRef.current.destroy();
+            window.location.reload();
+       } catch (error) {
+            console.log(error);
+       }
     }
 
     return (
@@ -129,9 +133,10 @@ function ContextProvider({children}) {
                 <Backdrop
                     sx={{ color: '#fff'}}
                     open={true}
-                    style={{zIndex: 999999}}
+                    style={{zIndex: 999999, display: 'flex', flexDirection: 'column', gap: 20}}
                 >
                     <CircularProgress style={{color: 'white'}} />
+                    <h2 style={{color: 'white', textAlign: 'center'}}>Vui lòng chờ, máy chủ cần thời gian để khởi động</h2>
                 </Backdrop>
             }
 
